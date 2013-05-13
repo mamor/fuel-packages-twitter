@@ -58,7 +58,7 @@ Copy packages/twitter/config/twitter.php to under app/config directory and edit
 				$request_token['oauth_token_secret'],
 				Input::get('oauth_verifier'));
 				
-			// $access_token has user_id, screen_name, oauth_token and oauth_token_secret;
+			// $access_token has user_id, screen_name, oauth_token and oauth_token_secret
 			Debug::dump($access_token);
 		}
 		

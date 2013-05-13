@@ -223,7 +223,7 @@ class Twitter
 	}
 
 	/**
-	 * Call api
+	 * Call API
 	 * 
 	 * @param  string $method
 	 * @param  string $uri
@@ -238,7 +238,7 @@ class Twitter
 
 		if ($code != 200)
 		{
-			throw new \FuelException('Request failed.');
+			throw new \FuelException('Code:'.$code.' Response:'.$this->tmhoauth->response['response']);
 		}
 
 		return $this->tmhoauth->extract_params($this->tmhoauth->response['response']);
