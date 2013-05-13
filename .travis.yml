@@ -1,0 +1,30 @@
+branches:
+  only:
+    - 'master'
+
+language: php
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+
+env:
+  global:
+    - PACKAGE=twitter
+    - GROUP=Twitter
+
+before_script:
+  - git clone --recursive git://github.com/fuel/fuel.git $HOME/fuelphp >& /dev/null
+  - cp -r `pwd` $HOME/fuelphp/fuel/packages/$PACKAGE
+  - cp -r $HOME/fuelphp/fuel/packages/$PACKAGE/.travis/config/config.php $HOME/fuelphp/fuel/app/config/config.php
+
+  - cd $HOME/fuelphp/
+  - php composer.phar install
+
+  - cd fuel/packages/$PACKAGE/
+  - php composer.phar install
+  - cd ../../../
+
+script:
+  - phpunit --group=$GROUP --coverage-text -c fuel/packages/$PACKAGE/phpunit.xml
