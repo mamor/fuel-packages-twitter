@@ -241,6 +241,12 @@ class Twitter
 			throw new \FuelException('Code:'.$code.' Response:'.$this->tmhoauth->response['response']);
 		}
 
-		return $this->tmhoauth->extract_params($this->tmhoauth->response['response']);
+		switch ($fmt)
+		{
+			case 'json':
+				return json_decode($this->tmhoauth->response['response']);
+			default:
+				return $this->tmhoauth->extract_params($this->tmhoauth->response['response']);
+		}
 	}
 }

@@ -31,12 +31,12 @@ class Stub_tmhOuth extends tmhOAuth
  */
 class Stub_Twitter extends Twitter
 {
-	public function __construct(array $config, $code)
+	public function __construct(array $config, $code, $response)
 	{
 		parent::__construct($config);
 
 		$this->tmhoauth = new Stub_tmhOuth($config, $code);
-		$this->tmhoauth->response['response'] = 'dummy_key=dummy_value';
+		$this->tmhoauth->response['response'] = $response;
 	}
 }
 
@@ -117,11 +117,15 @@ class Test_Twitter extends TestCase
 	 */
 	public function test_get()
 	{
-		$t = new Stub_Twitter(array(), 200);
-		$actual = $t->get('url');
+		$t = new Stub_Twitter(array(), 200, 'dummy_key=dummy_value');
+		$actual = $t->get('url', array(), '');
 		$expected = array('dummy_key' => 'dummy_value');
 		$this->assertEquals($expected, $actual);
 
+		$t = new Stub_Twitter(array(), 200, '{dummy_key:"dummy_value"}');
+		$actual = $t->get('url', array(), 'json');
+		$expected = json_decode('{dummy_key:"dummy_value"}');
+		$this->assertEquals($expected, $actual);
 	}
  
 	/**
@@ -129,11 +133,15 @@ class Test_Twitter extends TestCase
 	 */
 	public function test_post()
 	{
-		$t = new Stub_Twitter(array(), 200);
-		$actual = $t->post('url');
+		$t = new Stub_Twitter(array(), 200, 'dummy_key=dummy_value');
+		$actual = $t->post('url', array(), '');
 		$expected = array('dummy_key' => 'dummy_value');
 		$this->assertEquals($expected, $actual);
 
+		$t = new Stub_Twitter(array(), 200, '{dummy_key:"dummy_value"}');
+		$actual = $t->post('url', array(), 'json');
+		$expected = json_decode('{dummy_key:"dummy_value"}');
+		$this->assertEquals($expected, $actual);
 	}
  
 	/**
@@ -141,11 +149,15 @@ class Test_Twitter extends TestCase
 	 */
 	public function test_put()
 	{
-		$t = new Stub_Twitter(array(), 200);
-		$actual = $t->put('url');
+		$t = new Stub_Twitter(array(), 200, 'dummy_key=dummy_value');
+		$actual = $t->put('url', array(), '');
 		$expected = array('dummy_key' => 'dummy_value');
 		$this->assertEquals($expected, $actual);
 
+		$t = new Stub_Twitter(array(), 200, '{dummy_key:"dummy_value"}');
+		$actual = $t->put('url', array(), 'json');
+		$expected = json_decode('{dummy_key:"dummy_value"}');
+		$this->assertEquals($expected, $actual);
 	}
  
 	/**
@@ -153,11 +165,15 @@ class Test_Twitter extends TestCase
 	 */
 	public function test_delete()
 	{
-		$t = new Stub_Twitter(array(), 200);
-		$actual = $t->delete('url');
+		$t = new Stub_Twitter(array(), 200, 'dummy_key=dummy_value');
+		$actual = $t->delete('url', array(), '');
 		$expected = array('dummy_key' => 'dummy_value');
 		$this->assertEquals($expected, $actual);
 
+		$t = new Stub_Twitter(array(), 200, '{dummy_key:"dummy_value"}');
+		$actual = $t->delete('url', array(), 'json');
+		$expected = json_decode('{dummy_key:"dummy_value"}');
+		$this->assertEquals($expected, $actual);
 	}
  
 	/**
@@ -167,7 +183,7 @@ class Test_Twitter extends TestCase
 	 */
     public function test_call_exception()
     {
-		$t = new Stub_Twitter(array(), 201);
+		$t = new Stub_Twitter(array(), 201, 'dummy_key=dummy_value');
 		$t->get('url');
     }
 
