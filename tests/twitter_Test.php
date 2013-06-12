@@ -79,6 +79,19 @@ class Test_Twitter extends TestCase
  	}
 
 	/**
+	 * Test for get_authenticate_url()
+	 */
+	public function test_get_authenticate_url()
+	{
+		$t = Twitter::forge();
+
+		$oauth_token = 'xxx';
+		$actual = $t->get_authenticate_url($oauth_token);
+		$expected = 'https://api.twitter.com/oauth/authenticate?oauth_token=xxx';
+		$this->assertEquals($expected, $actual);
+	}
+
+	/**
 	 * Test for get_request_token()
 	 */
 	public function test_get_request_token()
