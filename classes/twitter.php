@@ -126,6 +126,17 @@ class Twitter
 	}
 
 	/**
+	 * Get authenticate url
+	 * 
+	 * @param  string $oauth_token
+	 * @return string
+	 */
+	public function get_authenticate_url($oauth_token)
+	{
+		return $this->tmhoauth->url('oauth/authenticate', '')."?oauth_token={$oauth_token}";
+	}
+
+	/**
 	 * Get authorize url
 	 * 
 	 * @param  string $oauth_token
