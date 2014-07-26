@@ -1,4 +1,4 @@
-# FuelPHP Package for Twitter [![Build Status](https://travis-ci.org/mp-php/fuel-packages-twitter.png)](https://travis-ci.org/mp-php/fuel-packages-twitter)
+# FuelPHP Package for Twitter [![Build Status](https://travis-ci.org/mamor/fuel-packages-twitter.png)](https://travis-ci.org/mamor/fuel-packages-twitter)
 
 ***
 
